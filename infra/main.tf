@@ -10,10 +10,10 @@ terraform {
 # AWS 설정 시작
 provider "aws" {
   region = var.region
-  profile = "my-new-account"
+  profile = "default"
   default_tags {
     tags = {
-      Team = "devcos5-team02"
+      Team = "asung-pickgo"
     }
   }
 }
@@ -36,7 +36,7 @@ resource "aws_vpc" "vpc_1" {
 resource "aws_subnet" "subnet_1" {
   vpc_id                  = aws_vpc.vpc_1.id
   cidr_block              = "10.0.0.0/24"
-  availability_zone       = "${var.region}b"
+  availability_zone       = "${var.region}a"
   map_public_ip_on_launch = true
 
   tags = {
@@ -246,7 +246,7 @@ yum install git -y
 # 5. 작업 디렉토리 생성 및 레포지토리 클론
 mkdir -p /app/pickgo
 cd /app/pickgo
-git clone https://${var.github_username}:${var.github_token}@github.com/prgrms-web-devcourse-final-project/WEB4_5_ServerSOS_BE.git .
+git clone https://github.com/asungkim/PickGO_Ticket.git .
 
 # 6. Backend 디렉토리 이동
 cd backend
@@ -290,7 +290,7 @@ resource "aws_instance" "ec2" {
   # 사용할 AMI ID
   ami = "ami-0eb302fcc77c2f8bd"
   # EC2 인스턴스 유형
-  instance_type = "t3.small"
+  instance_type = "t2.micro"
   # 사용할 서브넷 ID
   subnet_id = aws_subnet.subnet_1.id
   # 적용할 보안 그룹 ID
@@ -309,7 +309,7 @@ resource "aws_instance" "ec2" {
   # 루트 볼륨 설정
   root_block_device {
     volume_type = "gp3"
-    volume_size = 40
+    volume_size = 20
   }
 
   user_data = <<-EOF
@@ -386,61 +386,61 @@ resource "aws_s3_bucket_policy" "dev_bucket_policy" {
   })
 }
 
-resource "aws_instance" "metric_server" {
-  ami                         = "ami-0eb302fcc77c2f8bd"
-  instance_type               = "t3.micro"
-  subnet_id                   = aws_subnet.subnet_1.id
-  vpc_security_group_ids = [aws_security_group.sg_1.id]
-  associate_public_ip_address = true
-  iam_instance_profile        = aws_iam_instance_profile.instance_profile_1.name
-
-  tags = {
-    Name = "${var.prefix}-metric-server"
-  }
-
-  root_block_device {
-    volume_type = "gp3"
-    volume_size = 12
-  }
-
-  user_data = <<-EOF
-${local.metric_server_user_data}
-EOF
-}
-
-resource "aws_eip" "metric_server_eip" {
-  instance = aws_instance.metric_server.id
-
-  tags = {
-    Name = "${var.prefix}-metric-server-eip"
-  }
-}
-
-locals {
-  metric_server_user_data = <<-END_OF_FILE
-#!/bin/bash
-# 1. 스왑 메모리 설정
-sudo dd if=/dev/zero of=/swapfile bs=128M count=32
-sudo chmod 600 /swapfile
-sudo mkswap /swapfile
-sudo swapon /swapfile
-sudo sh -c 'echo "/swapfile swap swap defaults 0 0" >> /etc/fstab'
-
-# 2. Docker 설치
-yum install docker -y
-systemctl enable docker
-systemctl start docker
-
-# 3. Docker Compose 설치
-curl -L "https://github.com/docker/compose/releases/download/v2.24.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose
-
-# 4. Git 설치
-yum install git -y
-
-# 5. 작업 디렉토리 생성 및 레포지토리 클론
-mkdir -p /app/monitoring
-cd /app/monitoring
-
-END_OF_FILE
-}
+# resource "aws_instance" "metric_server" {
+#   ami                         = "ami-0eb302fcc77c2f8bd"
+#   instance_type               = "t2.micro"
+#   subnet_id                   = aws_subnet.subnet_1.id
+#   vpc_security_group_ids = [aws_security_group.sg_1.id]
+#   associate_public_ip_address = true
+#   iam_instance_profile        = aws_iam_instance_profile.instance_profile_1.name
+#
+#   tags = {
+#     Name = "${var.prefix}-metric-server"
+#   }
+#
+#   root_block_device {
+#     volume_type = "gp3"
+#     volume_size = 12
+#   }
+#
+#   user_data = <<-EOF
+# ${local.metric_server_user_data}
+# EOF
+# }
+#
+# resource "aws_eip" "metric_server_eip" {
+#   instance = aws_instance.metric_server.id
+#
+#   tags = {
+#     Name = "${var.prefix}-metric-server-eip"
+#   }
+# }
+#
+# locals {
+#   metric_server_user_data = <<-END_OF_FILE
+# #!/bin/bash
+# # 1. 스왑 메모리 설정
+# sudo dd if=/dev/zero of=/swapfile bs=128M count=32
+# sudo chmod 600 /swapfile
+# sudo mkswap /swapfile
+# sudo swapon /swapfile
+# sudo sh -c 'echo "/swapfile swap swap defaults 0 0" >> /etc/fstab'
+#
+# # 2. Docker 설치
+# yum install docker -y
+# systemctl enable docker
+# systemctl start docker
+#
+# # 3. Docker Compose 설치
+# curl -L "https://github.com/docker/compose/releases/download/v2.24.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+# chmod +x /usr/local/bin/docker-compose
+#
+# # 4. Git 설치
+# yum install git -y
+#
+# # 5. 작업 디렉토리 생성 및 레포지토리 클론
+# mkdir -p /app/monitoring
+# cd /app/monitoring
+#
+# END_OF_FILE
+# }
