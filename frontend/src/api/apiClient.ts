@@ -10,7 +10,7 @@ import {
   ReviewAPIApi,
 } from "./__generated__"
 
-export const BACKEND_API = "https://api.team2.pick-go.shop"
+export const BACKEND_API = "https://api.asung.pick-go.shop"
 
 const customFetch = async (url: string, init?: RequestInit) => {
   const loginInfo = getLoginInfo()
