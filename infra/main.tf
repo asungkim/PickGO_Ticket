@@ -317,6 +317,14 @@ ${local.ec2_user_data_base}
 EOF
 }
 
+resource "aws_eip" "main_eip" {
+  instance = aws_instance.ec2[0].id
+
+  tags = {
+    Name = "${var.prefix}-main-eip"
+  }
+}
+
 # 개발용 버킷
 resource "aws_s3_bucket" "pickgo_dev_bucket" {
   bucket        = "${var.prefix}-pickgo-dev-bucket"
