@@ -20,7 +20,13 @@ export const My = () => {
 
     try {
       setUploading(true)
-      await apiClient.member.updateProfileImage({ image: file })
+      const res = await apiClient.member.updateProfileImage({ image: file })
+      const newProfileUrl = res?.data
+
+      if (newProfileUrl) {
+        // 이미지 캐싱 방지용 쿼리스트링 추가
+        user.profile = `${newProfileUrl}?t=${Date.now()}`
+      }
       await refetch?.()
     } catch (err) {
       console.error("프로필 이미지 업로드 실패:", err)
