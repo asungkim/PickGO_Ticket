@@ -1,18 +1,17 @@
-# WEB4_5_Team02_ServerSOS
-프로그래머스 4기 5회차 서버야버텨줘 팀 최종프로젝트 PickGo
+# 티켓 예매 서비스 PickGO
 
 ---
-# 팀원 소개
+## 팀원 소개
+
+## PickGO - 공연 티켓 예매 웹사이트
+https://pick-go.shop
+> 연극, 뮤지컬, 콘서트, 무용 등 다양한 공연을 위한 **기술 중심 예매 시스템**
+## 팀원 소개
 | 김아성 | 김진명 | 전기범 | 이승민 | 조현우 |
 |--------|--------|--------|--------|--------|
 | <img src="https://avatars.githubusercontent.com/u/130833844?v=4" alt="김아성" width="150"> | <img src="https://avatars.githubusercontent.com/u/91389299?v=4" alt="김진명" width="150"> | <img src="https://avatars.githubusercontent.com/u/37178265?v=4" alt="전기범" width="150"> | <img src="https://avatars.githubusercontent.com/u/101695929?v=4" alt="이승민" width="150"> | <img src="https://avatars.githubusercontent.com/u/151692425?v=4" alt="조현우" width="150"> |
-| [asungkim](https://github.com/asungkim) | [jin214930](https://github.com/jin214930) | [JunKiBeom](https://github.com/JunKiBeom) | [min429](https://github.com/min429) | [chohyunwoo](https://github.com/chohyunwoo) |
-| - CI/CD 담당<br> - 예약 구현 및 결제 개선<br> - 로그 구현<br> - 모니터링 구현 | - KOPIS API 연동<br> - 공연 데이터 처리<br> - 좌석 구조 구현 | - 결제 구현<br> - 토스페이먼츠 API 연동<br> - 리뷰 기능 개선<br> - 성능 및 부하 테스트<br> - 로그 처리 개선 | - 회원 구현(JWT, OAuth2)<br> - Redis 기반 대기열 구현 | - 좌석 실시간 상태 구현<br> - 관리자 CRUD 구현<br> - 리뷰 구현<br> - 모니터링 구현 |
-
-# PickGO - 공연 티켓 예매 웹사이트
-https://web4-5-serversos-be.pages.dev
-> 연극, 뮤지컬, 콘서트, 무용 등 다양한 공연을 위한 **기술 중심 예매 시스템**
-
+| [asungkim](https://github.com/asungkim)<br>**팀장 (PO)** | [jin214930](https://github.com/jin214930)<br>**팀원** | [JunKiBeom](https://github.com/JunKiBeom)<br>**팀원** | [min429](https://github.com/min429)<br>**팀원** | [chohyunwoo](https://github.com/chohyunwoo)<br>**팀원** |
+| - CI/CD 담당<br> - 예약 구현 및 결제 개선<br> - 로그 구현<br> - 모니터링 구현 | - KOPIS API 연동<br> - 공연 데이터 처리<br> - 좌석 구조 구현 | - 결제 구현<br> - 토스페이먼츠 API 연동<br> - 리뷰 기능 개선<br> - 성능 및 부하 테스트<br> - 로그 처리 개선 | - 회원 구현(JWT, OAuth2)<br> - Redis 기반 대기열 구현 | - 좌석 실시간 상태 구현<br> - 관리자 CRUD 구현<br> - 리뷰 구현<br>  |
 ---
 
 ## 프로젝트 개요
@@ -199,7 +198,7 @@ https://web4-5-serversos-be.pages.dev
 
 ---
 ## API 명세
-[Swagger 문서 바로가기](https://api.team2.pick-go.shop/swagger-ui/index.html)
+[Swagger 문서 바로가기](https://api.asung.pick-go.shop/swagger-ui/index.html)
 
 [API 명세 Wiki 바로가기](https://github.com/prgrms-web-devcourse-final-project/WEB4_5_ServerSOS_BE/wiki/API-명세)
 
