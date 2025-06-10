@@ -13,6 +13,8 @@ import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
 import java.net.URI;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 @Service
@@ -29,7 +31,11 @@ public class AwsS3Uploader implements S3Uploader {
 
     @Override
     public String upload(MultipartFile file, String dirName) {
-        String fileName = dirName + "/" + UUID.randomUUID() + "_" + file.getOriginalFilename();
+        String originalFilename = file.getOriginalFilename();
+        String encodedFilename = URLEncoder.encode(originalFilename, StandardCharsets.UTF_8)
+                .replaceAll("\\+", "%20"); // 공백도 안전하게 처리
+
+        String fileName = dirName + "/" + UUID.randomUUID() + "_" + encodedFilename;
 
         PutObjectRequest putObjectRequest = PutObjectRequest.builder()
                 .bucket(bucketName)
